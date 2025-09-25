@@ -51,12 +51,6 @@ Replace `YourUserName` and `YourPassword` with your MySQL database credentials.
         
         During the setup of your Google credentials, find the section to add the API scopes and include the scopes relevant to the features you intend to use.
         
-        [![non-sensitive scopes](https://github.com/wp-ahmed/crm/assets/54330098/f1bc7026-591a-4d40-affa-e038e29591b2)](https://github.com/wp-ahmed/crm/assets/54330098/f1bc7026-591a-4d40-affa-e038e29591b2)
-
-        ![sensitive scopes](https://github.com/wp-ahmed/crm/assets/54330098/14d82922-0904-45d0-9874-da18c90fb352)
-
-        ![restricted scopes](https://github.com/wp-ahmed/crm/assets/54330098/b76a5cf8-c342-42e9-9848-6d0844f83575)
-
         
 3. **Configure the redirect URI for the Google authentication flow:**
 
