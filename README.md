@@ -1,24 +1,36 @@
-# CRM Web Application
+# 🚀 CRM Web Application
 
-This CRM (Customer Relationship Management) application is built using Spring Boot MVC, Thymeleaf, Hibernate, MySQL, and Java 17. The application provides a comprehensive solution for managing customer interactions, tasks, appointments, and communication. It also integrates with various Google services, including Google Drive, Gmail, and Google Calendar, to enhance productivity and collaboration.
+Welcome to the **CRM (Customer Relationship Management) Web App** — a robust enterprise-grade solution built with **Spring Boot MVC**, **Thymeleaf**, **Hibernate**, **MySQL**, and **Java 17**.
 
-## **Prerequisites**
+This app empowers teams to manage customers, leads, contracts, appointments, and communications efficiently — with powerful integrations like **Google Drive**, **Gmail**, and **Google Calendar**.
 
-Before installing the CRM application, ensure the following:
+---
 
-- Java 17 is installed on your machine.
-- MySQL database is set up and running.
-- Obtain valid MySQL connection details (URL, username, password).
-- Obtain Google API credentials for integration with Google services (Drive, Gmail, Calendar).
+## 🔧 Prerequisites
 
-## Installation
+Make sure your system has the following:
 
-To install and run the CRM application, follow these steps:
+- ✅ Java 17 installed
+- ✅ MySQL running and accessible
+- ✅ Valid MySQL credentials (URL, username, password)
+- ✅ Google API credentials (OAuth 2.0) for Drive, Gmail, and Calendar integration
 
-1. Clone the repository from GitHub.
-2. Configure the MySQL database connection details in the `application.properties` file:
+---
 
+## 📦 Installation Guide
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/khushi036/Khushi-crm.git
+cd Khushi-crm
 ```
+
+---
+
+### 2. Configure MySQL in `application.properties`
+
+```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/crm?createDatabaseIfNotExist=true
 spring.datasource.username=YourUserName
 spring.datasource.password=YourPassword
@@ -26,142 +38,171 @@ spring.jpa.hibernate.ddl-auto=none
 spring.sql.init.mode=always
 ```
 
-Replace `YourUserName` and `YourPassword` with your MySQL database credentials.
+> Replace `YourUserName` and `YourPassword` with your actual MySQL credentials.
 
-1. **Set up the necessary Google API credentials for Google integration:**
-    - Go to the [Google Cloud Console](https://console.cloud.google.com/).
-    - Create a new project or select an existing project.
-    - Enable the necessary APIs for your project (e.g., Google Drive, Gmail, Calendar).
-    - In the project dashboard, navigate to the **Credentials** section.
-    - Click on **Create Credentials** and select **OAuth client ID**.
-    - Configure the OAuth consent screen with the required information.
-    - Choose the application type as **Web application**.
-    - Add the authorized redirect URIs in the **Authorized redirect URIs** section. For example:
-        - `http://localhost:8080/login/oauth2/code/google`
-        - `http://localhost:8080/employee/settings/handle-granted-access`
-        Replace `localhost:8080` with the base URL of your CRM application.
-    - Complete the setup and note down the **Client ID** and **Client Secret**.
-2. **Modify the Google API scopes for accessing Google services**:
-    
-    While setting up the Google API credentials, you need to add the required scopes to define the level of access the application has to your Google account. The required scopes depend on the specific features you want to use. Here are the scopes for common Google services:
-    
-    - Google Drive: `https://www.googleapis.com/auth/drive`
-    - Gmail: `https://www.googleapis.com/auth/gmail.readonly`
-    - Google Calendar: `https://www.googleapis.com/auth/calendar`
-        
-        During the setup of your Google credentials, find the section to add the API scopes and include the scopes relevant to the features you intend to use.
-        
-        
-3. **Configure the redirect URI for the Google authentication flow:**
+---
 
-```
+### 3. Set Up Google API Credentials
+
+- Go to [Google Cloud Console](https://console.cloud.google.com/)
+- Create or select a project
+- Enable:
+  - Google Drive API
+  - Gmail API
+  - Google Calendar API
+- Go to **APIs & Services > Credentials**
+  - Click **Create Credentials > OAuth Client ID**
+  - Choose **Web Application**
+  - Add the following Redirect URIs:
+    - `http://localhost:8080/login/oauth2/code/google`
+    - `http://localhost:8080/employee/settings/handle-granted-access`
+  - Save the **Client ID** and **Client Secret**
+
+---
+
+### 4. Define Google OAuth Redirect URI
+
+```properties
 spring.security.oauth2.client.registration.google.redirect-uri={baseUrl}/login/oauth2/code/{registrationId}
-
 ```
 
-1. Customize the authorization and authentication URLs for the application if needed:
+---
 
-```
+### 5. Set Google OAuth Authorization and Token URIs
+
+```properties
 spring.security.oauth2.client.provider.google.authorization-uri=https://accounts.google.com/o/oauth2/auth
 spring.security.oauth2.client.provider.google.token-uri=https://accounts.google.com/o/oauth2/token
-
 ```
 
-1. Build the application using Maven:
+---
+
+### 6. Add Required Google API Scopes
+
+| Service        | Scope URL                                     |
+|----------------|-----------------------------------------------|
+| Google Drive   | `https://www.googleapis.com/auth/drive`       |
+| Gmail          | `https://www.googleapis.com/auth/gmail.readonly` |
+| Google Calendar| `https://www.googleapis.com/auth/calendar`    |
+
+Add these scopes when configuring your credentials in the Google Cloud Console.
+
+---
+
+### 7. Build the Application
 
 ```bash
 mvn clean install
-
 ```
 
-1. Run the application:
+---
+
+### 8. Run the Application
 
 ```bash
 mvn spring-boot:run
-
 ```
 
-1. Access the CRM application in your web browser at `http://localhost:8080`.
+---
 
-## Features
+### 9. Access the App
 
-### User Authentication and Authorization
+Open your browser and go to:
 
-- Users can log in using their regular credentials or choose to log in using their Google accounts.
-- Google login allows users to grant access to Google Drive, Gmail, and Google Calendar.
+```
+http://localhost:8080
+```
 
-### Google Drive Integration
+---
 
-- Users can create, delete, and share files and folders with colleagues directly from the CRM application.
-- Integration with Google Drive enables seamless collaboration and document management.
+## 🌟 Features Overview
 
-### Google Calendar Integration
+### 🔐 Authentication & Authorization
 
-- Integrated with FullCalendar JS library, users can easily manage their calendar, create, edit, and delete meetings.
-- Automated email notifications are sent to attendees when meetings are scheduled or modified.
+- Secure login via username/password
+- Google OAuth login (Drive, Gmail, Calendar integration)
 
-### Google Gmail Integration
+---
 
-- Users can send emails, save drafts, and manage their inbox, sent items, drafts, and trash directly within the CRM application.
-- Gmail integration streamlines communication and enables efficient email management.
+### 📁 Google Drive Integration
 
-### User Roles and Permissions
+- Create, delete, and share files/folders
+- Auto-save ticket/lead attachments
 
-- The application supports different roles, including Manager, Employee, Sales, and Customers.
-- Each role has specific access and permissions tailored to their responsibilities.
+---
 
-### Manager Role
+### 📅 Google Calendar Integration
 
-- Managers have access to all features and functionalities in the CRM application.
-- They can create new users, assign specific roles to users, define new roles, and manage access to different pages for employees.
-- Managers can assign tickets and leads to employees for efficient task allocation.
+- Visual calendar via FullCalendar.js
+- Create/edit/delete meetings with email notifications
 
-### Employee Role
+---
 
-- Employees have access to their assigned tickets, leads, contracts, and task history.
-- They can manage their customers and create new tickets.
-- Employees receive email notifications for newly assigned tasks (configurable in user settings).
+### 📧 Gmail Integration
 
-### Customer Role
+- View inbox, drafts, sent, and trash
+- Send emails and save drafts directly from the app
 
-- Customers have access to their tickets, leads, and contracts.
-- They receive email notifications for any changes to their tickets, leads, or contracts.
-- Customers can manage their notification preferences in their settings.
+---
 
-### Leads Management
+### 👥 User Roles & Permissions
 
-- Users can create, update, delete, and view leads.
-- Integration with Google Drive allows automatic saving of lead attachments.
-- Integration with Google Calendar enables scheduling meetings with customers.
+| Role     | Access Highlights |
+|----------|-------------------|
+| Manager  | Full access, user/role management, ticket/lead assignment |
+| Employee | Handle assigned leads, contracts, and tickets |
+| Customer | View/manage their own tickets, leads, contracts |
 
-### Tickets Management
+---
 
-- Users can create, update, delete, and view tickets.
-- Integration with Google Drive allows automatic saving of ticket attachments.
-- Integration with Google Calendar enables scheduling meetings related to tickets.
+### 🎯 Leads Management
 
-### Contracts Management
+- Create, update, delete, view leads
+- Auto-save lead files to Google Drive
+- Schedule lead meetings with Google Calendar
 
-- Users can create, update, delete, and view contracts.
-- Contracts can include details such as amount, start and end dates, description, and attachments.
-- Integration with Google Drive allows uploading and sharing contracts with customers.
+---
 
-### Email Templates and Campaigns
+### 🧾 Ticket Management
 
-- Users can create personalized email templates using the Unlayer library's drag-and-drop functionality.
-- Email campaigns can be created using the predefined templates.
+- Full CRUD support
+- Attachments saved to Drive
+- Integrated meeting scheduling
 
-### User Settings
+---
 
-- Users can configure email settings and Google service access from their settings page.
-- Email settings allow employees to enable or disable the automatic sending of emails to customers using predefined email templates when tickets, leads, or other objects are updated.
-- Google settings allow users to manage access to Google services, enabling or disabling integration with Google Drive, Gmail, and Google Calendar.
+### 📄 Contracts
 
+- Manage contracts with amount, dates, description, attachments
+- Share via Google Drive
 
-## Contributing
+---
 
-Contributions to the CRM Web Application are welcome! If you spot any bugs or would like to propose new features, please open an issue or submit a pull request.
+### ✉️ Email Templates & Campaigns
 
-## License
+- Use drag-and-drop Unlayer editor
+- Send personalized campaign emails
 
-This project is licensed under the MIT License.
+---
+
+### ⚙️ User Settings
+
+- Enable/disable Google integrations
+- Customize email preferences
+- Manage automatic notifications for updates
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!  
+Feel free to open an issue or submit a pull request with improvements or bug fixes.
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
+---
+
